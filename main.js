@@ -16,6 +16,7 @@ fileUploadControl.onchange = () => {
   }
   file.save().then(res => {
     console.log(res.length);
+    console.log('这是url')
     console.log(res);
   })
 }
