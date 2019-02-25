@@ -7,7 +7,7 @@ query.save().then(res => {
 }).catch(err => {
   console.log(err)
 })
-const fileUploadControl = document.getElementById('profilePhotoFileUpload');
+const fileUploadControl = document.getElementById('fileUpload');
 fileUploadControl.onchange = () => {
   const pic = fileUploadControl.files
   let file
