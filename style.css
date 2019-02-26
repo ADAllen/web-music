@@ -69,8 +69,11 @@ border: 1px solid green;
 
 .ui-upload:hover {
     box-shadow: 6px 3px 20px 1px rgba(0,0,0,0.4);
-    
-    
-
 }
-
+form{
+    margin: 25px;
+}
+.row{
+    display: inline-block;
+    margin: 10px;
+}
