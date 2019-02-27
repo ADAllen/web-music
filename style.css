@@ -71,9 +71,20 @@ border: 1px solid green;
     box-shadow: 6px 3px 20px 1px rgba(0,0,0,0.4);
 }
 form{
+    font-size: 15px;
     margin: 25px;
 }
 .row{
-    display: inline-block;
+    display: flex;
     margin: 10px;
+}
+form input[type=text]{
+    padding: 3px 8px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    height: 30px;
+
+}
+form>button{
+    padding: 5px;
 }
