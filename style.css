@@ -9,6 +9,10 @@
 *::before{
     box-sizing: border-box
 }
+input[type="button"] {
+    -webkit-apperaence: none; /* button也行 */
+    box-sizeing: content-box;
+}
 body{
     font-size: 12px;
     line-height: 1.5
@@ -70,6 +74,9 @@ border: 1px solid green;
 .ui-upload:hover {
     box-shadow: 6px 3px 20px 1px rgba(0,0,0,0.4);
 }
+main>h1{
+    margin: 25px;
+}
 form{
     font-size: 15px;
     margin: 25px;
@@ -78,13 +85,20 @@ form{
     display: flex;
     margin: 10px;
 }
-form input[type=text]{
+.form input[type=text]{
     padding: 3px 8px;
     border-radius: 5px;
     border: 1px solid #ddd;
     height: 30px;
 
 }
-form>button{
-    padding: 5px;
+.form input[type=button],
+.form input[type=submit]
+{
+    width: 200px;
+    height: 300px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 5px;
+
 }
