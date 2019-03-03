@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/ADAllen/web-music/issues"
   },
-  "homepage": "https://github.com/ADAllen/web-music#readme"
+  "homepage": "https://github.com/ADAllen/web-music#readme",
+  "dependencies": {
+    "jquery": "^3.3.1"
+  }
 }

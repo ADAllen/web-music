@@ -9,6 +9,10 @@
 *::before{
     box-sizing: border-box
 }
+input[type="submit"]{
+    -webkit-apperaence: none; /* button也行 */
+    
+}
 body{
     font-size: 12px;
     line-height: 1.5
@@ -32,7 +36,9 @@ border: 1px solid green;
 
 
 /*saide*/
-
+main{
+    background: #999;
+}
 .newSong{
     text-align: center;
     padding:10px
@@ -70,6 +76,9 @@ border: 1px solid green;
 .ui-upload:hover {
     box-shadow: 6px 3px 20px 1px rgba(0,0,0,0.4);
 }
+main>h1{
+    margin: 25px;
+}
 form{
     font-size: 15px;
     margin: 25px;
@@ -78,13 +87,24 @@ form{
     display: flex;
     margin: 10px;
 }
-form input[type=text]{
+.form input[type=text]{
     padding: 3px 8px;
     border-radius: 5px;
     border: 1px solid #ddd;
     height: 30px;
 
 }
-form>button{
-    padding: 5px;
+.ui-sub
+{
+    margin-left: 105px;
+    border-radius: 5px;
+    border: 1px solid #998;
+    background: skyblue;
+    height: 30px;
+    width: 60px;
+    text-align: center;
+    padding-top: 3px;
+}
+.ui-sub:hover{
+    box-shadow: 3px 1.5px 10px 1px rgba(0,0,0,0.4);
 }
