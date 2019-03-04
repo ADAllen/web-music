@@ -46,8 +46,11 @@ main{
 .newSong.active{
     background: #d4d4d4;
 }
-.songList{
+.songList-container{
     flex-grow: 1; /* 和上面的 flex-direction:column 配合使用*/
+}
+.songList{
+    
     text-align: left;
     border-top: 1px solid #998;
 }
