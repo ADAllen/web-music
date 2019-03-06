@@ -42,6 +42,14 @@
             this.view=view
             this.model=model
             this.view.render(this.model.data)
+            window.eventHub.on('upload',(data)=>{
+                console.log(1)
+                console.log(data)
+
+            })
+        },
+        reset(data){
+            console.log('reset')
         }
 
     }
