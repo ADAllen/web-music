@@ -38,7 +38,7 @@
             
                             console.log(res);
                             console.log(res[0].url);
-                            window.eventHub.emit('upload是',{
+                            window.eventHub.emit('upload',{
                                 linke:res[0].url,
                                 songkey:res[0].filename
                             })

@@ -18,9 +18,7 @@
 
             })
         },
-        active(){
-            $(this.view.el).addClass('active')
-        }
+        
         
     }
     controller.init(view,model)
