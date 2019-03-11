@@ -16,15 +16,7 @@
         },
         initBmob(){
             
-        Bmob.initialize("6a3b16d9a49aadb7205c231e0931ed57", "848173d2ba42cc9a8ea47b3c03dabedc")
-        const query = Bmob.Query('songs')
-        query.set("SongName","Bmob")
-        query.set("singer","爱谁谁")
-        query.save().then(res => {
-          console.log(res)
-        }).catch(err => {
-          console.log(err)
-        })
+        
         
         const fileUploadControl = document.getElementById('fileUpload')
                     fileUploadControl.onchange = () => {
@@ -39,8 +31,8 @@
                             console.log(res);
                             console.log(res[0].url);
                             window.eventHub.emit('upload',{
-                                linke:res[0].url,
-                                songkey:res[0].filename
+                                link:res[0].url,
+                                key:res[0].filename
                             })
                             
         
