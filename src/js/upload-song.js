@@ -26,13 +26,10 @@
                         file = Bmob.File(item.name, item);
                     }
                         file.save().then(res => {
-                            console.log(res.length);
-            
-                            console.log(res);
-                            console.log(res[0].url);
+                            
                             window.eventHub.emit('upload',{
-                                link:res[0].url,
-                                key:res[0].filename
+                                url:res[0].url,
+                                name:res[0].filename
                             })
                             
         

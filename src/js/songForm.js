@@ -9,19 +9,19 @@
             <div class="row">
                 <lavel>
                     歌名
-                    <input name="name" type=text value="__key__">
+                    <input name="name" type=text value="__name__">
                 </lavel>
             </div>
             <div class="row">
                     <lavel>
                         歌手
-                        <input name="singer" type=text >
+                        <input name="singer" type=text value="__singer__" >
                     </lavel>
                 </div>
                 <div class="row">
                         <lavel>
                             外链
-                            <input name="url" type=text value="__link__">
+                            <input name="url" type=text value="__url__">
                         </lavel>
                     </div>       
             <div class="row">
@@ -33,12 +33,15 @@
             </div>             
         </form>`,
         render(data={}){
-            let placeholders=['key','link']
+            let placeholders=['name','url','singer','id']
             let html=this.template
             placeholders.map((string)=>{
                 html=html.replace(`__${string}__`,data[string] ||'')
             })
             $(this.el).html(html)
+        },
+        reset(){
+            this.render({})
         }
         
     }
@@ -51,18 +54,19 @@
         query.set("SongName",data.name)
         query.set("singer",data.singer)
         query.set("url",data.url)
-        query.save().then(res => {
-           
-          console.log(res)
+        return query.save().then(res => {
+            data.id=res.objectId
+            Object.assign(this.data,{...data})
+
         }).catch(err => {
           console.log(err)
         })
 
         }
-
+        
     }
     let controller={
-        init(ciew,model){
+        init(view,model){
             this.view=view
             this.view.init()
 
@@ -70,13 +74,14 @@
             this.view.render(this.model.data)
             this.bindEvents()
             window.eventHub.on('upload',(data)=>{
-                this.reset(data)
+                this.model.data=data
+                console.log(data)
+                this.view.render(this.model.data)
+                
 
             })
         },
-        reset(data){
-            this.view.render(data)
-        },
+       
         bindEvents(){
             this.view.$el.on('submit','form',(e)=>{
                 e.preventDefault()
@@ -88,13 +93,20 @@
                 })
                 this.model.create(data)
                 .then(()=>{
-                    this
+                    
+                    this.view.reset()
+                    let string=JSON.stringify(this.model.data)//深拷贝
+                    let object=JSON.parse(string)
+
+                    window.eventHub.emit('create',object)
                 })
+                
             })
 
         }
 
     }
     controller.init(view,model)
+    
 
 }
