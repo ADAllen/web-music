@@ -51,7 +51,7 @@
         },
         create(data){
             const query = Bmob.Query('songs')
-        query.set("SongName",data.name)
+        query.set("name",data.name)
         query.set("singer",data.singer)
         query.set("url",data.url)
         return query.save().then(res => {

@@ -26,6 +26,14 @@
             songs:[
                 
             ]
+        },
+        find(){
+            const query = Bmob.Query("songs");
+            return query.find().then(songs => {
+            this.data.songs=songs
+
+            //return songs
+            });
         }
     }
     let controller={
@@ -38,6 +46,10 @@
             })
             window.eventHub.on('create',(songData)=>{
                 this.model.data.songs.push(songData)
+                this.view.render(this.model.data)
+            })
+            this.model.find().then(()=>{
+                console.log(this.model.data)
                 this.view.render(this.model.data)
             })
         }
