@@ -80,6 +80,9 @@
                 
 
             })
+            window.eventHub.on('select',(data)=>{
+                
+            })
         },
        
         bindEvents(){
