@@ -27,7 +27,7 @@
                     }
                         file.save().then(res => {
                             
-                            window.eventHub.emit('upload',{
+                            window.eventHub.emit('new',{
                                 url:res[0].url,
                                 name:res[0].filename
                             })

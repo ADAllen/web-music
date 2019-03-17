@@ -36,8 +36,6 @@
             const query = Bmob.Query("songs");
             return query.find().then(songs => {
             this.data.songs=songs
-            
-
             return songs
             });
         }
@@ -66,18 +64,28 @@
                 this.view.activeItem(e.currentTarget)
                 let songId=e.currentTarget.getAttribute('data-song-id')
                 
-                window.eventHub.emit('select',{id:songId})
+                let data
+                let songs=this.model.data.songs
+                for(let i=0;i<songs.length;i++){
+                    if(songs[i].objectId===songId){
+                        data=songs[i]
+                        break
+                    }
+                }
+                
+                window.eventHub.emit('select',JSON.parse(JSON.stringify(data)))
 
             })
 
         },
         bindEventHub(){
-            window.eventHub.on('upload',()=>{
-                this.view.clearActive()
-            })
+           
             window.eventHub.on('create',(songData)=>{
                 this.model.data.songs.push(songData)
                 this.view.render(this.model.data)
+            })
+            window.eventHub.on('new',()=>{
+                this.view.clearActive
             })
         }
     }
