@@ -52,7 +52,7 @@
     }
     let model={
         data:{
-            name:'',singer:'',url:'',id:'',
+            name:'',singer:'',url:'',objectId:'',
         },
         create(data){
             const query = Bmob.Query('songs')
@@ -60,13 +60,24 @@
         query.set("singer",data.singer)
         query.set("url",data.url)
         return query.save().then(res => {
-            data.id=res.objectId
+            data.objectId=res.objectId
             Object.assign(this.data,{...data})
 
         }).catch(err => {
           console.log(err)
         })
 
+        },
+        update(data){
+            const song = Bmob.Query('songs');
+            song.set('id', this.data.objectId) //需要修改的objectId
+            song.set('name', data.name)
+            song.set('singer', data.singer)
+            song.set('url', data.url)
+          return song.save().then((response)=>{
+              Object.assign(this.data,data)
+              return response
+          })
         }
         
     }
@@ -86,7 +97,7 @@
             window.eventHub.on('new',(data)=>{
               if(this.model.data.objectId){
                     this.model.data={
-                        name:'',url:'',id:'',singer:''
+                        name:'',url:'',objectId:'',singer:''
                     }
                 }else{Object.assign(this.model.data=data,data)}
                 
@@ -94,24 +105,47 @@
             })
         },
        
+        create(){
+            let needs='name singer url'.split(' ')
+            let data={}
+            needs.map((string)=>{
+                data[string]=
+                this.view.$el.find(`[name="${string}"]`).val()
+            })
+            this.model.create(data)
+            .then(()=>{
+                
+                this.view.reset()
+                let string=JSON.stringify(this.model.data)//深拷贝
+                let object=JSON.parse(string)
+
+                window.eventHub.emit('create',object)
+            })
+        },
+        update(){
+            let needs='name singer url'.split(' ')
+            let data={}
+            needs.map((string)=>{
+                data[string]=
+                this.view.$el.find(`[name="${string}"]`).val()
+            })
+            this.model.update(data).then(()=>{
+                alert('updata success')
+                window.eventHub.emit('update',JSON.parse(JSON.stringify(this.model.data)))
+            })
+            
+            
+        },
         bindEvents(){
             this.view.$el.on('submit','form',(e)=>{
                 e.preventDefault()
-                let needs='name singer url'.split(' ')
-                let data={}
-                needs.map((string)=>{
-                    data[string]=
-                    this.view.$el.find(`[name="${string}"]`).val()
-                })
-                this.model.create(data)
-                .then(()=>{
-                    
-                    this.view.reset()
-                    let string=JSON.stringify(this.model.data)//深拷贝
-                    let object=JSON.parse(string)
+                if(this.model.data.objectId){
+                    this.update()
+                }else{
+                    this.create()
+                }
 
-                    window.eventHub.emit('create',object)
-                })
+               
                 
             })
 
